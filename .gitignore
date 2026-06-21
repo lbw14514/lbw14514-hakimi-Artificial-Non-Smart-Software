@@ -1,0 +1,21 @@
+﻿# 二进制安装包
+*.msi
+*.exe
+*.rar
+*.zip
+
+# 编译中间文件
+*.obj
+*.o
+*.pdb
+*.ilk
+
+# IDE 配置
+.vs/
+.vscode/
+*.suo
+*.user
+
+# 系统文件
+Thumbs.db
+.DS_Store
