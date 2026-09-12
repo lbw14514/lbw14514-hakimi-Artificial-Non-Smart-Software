@@ -7,10 +7,9 @@
 #include <map>
 #include <vector>
 
-using namespace std;
-
 int readIntFromLine(const std::string& prompt)
 {
+    using namespace std;
     string line;
     int value;
     for (;;)
@@ -30,7 +29,7 @@ int readIntFromLine(const std::string& prompt)
                 return value;
         }
 
-        cout << "ÊäÈëÎŞĞ§£¬ÇëÊäÈëÒ»¸öÕûÊı¡£" << endl;
+        cout << "è¾“å…¥æ— æ•ˆï¼Œè¯·è¾“å…¥ä¸€ä¸ªæ•´æ•°ã€‚" << endl;
     }
 }
 
@@ -38,25 +37,27 @@ int readIntFromLine(const std::string& prompt)
 std::string chooseLanguage() {
     using namespace std;
     map<string, string> languages = {
-        {"1", "ÖĞÎÄ"},
+        {"1", "ä¸­æ–‡"},
         {"2", "English"},
-        {"3", "ÈÕ±¾ÕZ"},
-        {"4", "Fran?ais"},
+        {"3", "æ—¥æœ¬èª"},
+        {"4", "FranÃ§ais"},
         {"5", "Deutsch"},
-        {"6", "Espa?ol"}
+        {"6", "EspaÃ±ol"},
+        {"7", "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©"}
     };
 
-    cout << "ÇëÑ¡ÔñÓïÑÔ:" << endl;
-    cout << "1) ÖĞÎÄ" << endl;
+    cout << "è¯·é€‰æ‹©è¯­è¨€:" << endl;
+    cout << "1) ä¸­æ–‡" << endl;
     cout << "2) English" << endl;
-    cout << "3) ÈÕ±¾ÕZ" << endl;
-    cout << "4) Fran?ais" << endl;
+    cout << "3) æ—¥æœ¬èª" << endl;
+    cout << "4) FranÃ§ais" << endl;
     cout << "5) Deutsch" << endl;
-    cout << "6) Espa?ol" << endl;
+    cout << "6) EspaÃ±ol" << endl;
+    cout << "7) Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©" << endl;
 
     string langChoice;
     while (true) {
-        cout << "ÊäÈëÑ¡Ïî±àºÅ²¢»Ø³µ: " << flush;
+        cout << "è¾“å…¥é€‰é¡¹ç¼–å·å¹¶å›è½¦: " << flush;
         if (!getline(cin, langChoice)) {
             cin.clear();
             this_thread::sleep_for(chrono::milliseconds(100));
@@ -65,7 +66,7 @@ std::string chooseLanguage() {
         if (languages.find(langChoice) != languages.end()) {
             return languages[langChoice];
         } else {
-            cout << "ÎŞĞ§Ñ¡Ïî£¬ÇëÖØÊÔ¡£" << endl;
+            cout << "æ— æ•ˆé€‰é¡¹ï¼Œè¯·é‡è¯•ã€‚" << endl;
         }
     }
 }
@@ -77,13 +78,13 @@ int main(void)
     string language = chooseLanguage();
 
     map<string, vector<string>> menuOptions = {
-        {"ÖĞÎÄ", {"ÇëÑ¡Ôñ¹¦ÄÜ£º", "1) hakimi ¼Ó·¨Ğ¡³ÌĞò", "2) hakimiÑ§ÄãËµ»°", "3) ÍË³ö (»ò ÊäÈë q)", "4) ·µ»ØÉÏÒ»²½", "ÊäÈëÑ¡Ïî±àºÅ²¢»Ø³µ£º"}},
+        {"ä¸­æ–‡", {"è¯·é€‰æ‹©åŠŸèƒ½ï¼š", "1) hakimi åŠ æ³•å°ç¨‹åº", "2) hakimiå­¦ä½ è¯´è¯", "3) é€€å‡º (æˆ– è¾“å…¥ q)", "4) è¿”å›ä¸Šä¸€æ­¥", "è¾“å…¥é€‰é¡¹ç¼–å·å¹¶å›è½¦ï¼š"}},
         {"English", {"Please select a function:", "1) hakimi addition program", "2) hakimi repeats what you say", "3) Exit (or type q)", "4) Go back to the previous step", "Enter the option number and press Enter:"}},
-        {"ÈÕ±¾ÕZ", {"™CÄÜ¤òßx’k¤·¤Æ¤¯¤À¤µ¤¤£º", "1) hakimi ¼ÓËã¥×¥í¥°¥é¥à", "2) hakimi¤¬¤¢¤Ê¤¿¤ÎÑÔÈ~¤òÀR¤ê·µ¤·¤Ş¤¹", "3) ½KÁË (¤Ş¤¿¤Ï q ¤òÈëÁ¦)", "4) Ç°¤Î¥¹¥Æ¥Ã¥×¤Ë‘ø¤ë", "¥ª¥×¥·¥ç¥ó·¬ºÅ¤òÈëÁ¦¤·¤ÆEnter¥­©`¤òÑº¤·¤Æ¤¯¤À¤µ¤¤£º"}},
-        {"Fran?ais", {"Veuillez s¨¦lectionner une fonction :", "1) Programme d'addition hakimi", "2) hakimi r¨¦p¨¨te ce que vous dites", "3) Quitter (ou tapez q)", "4) Revenir ¨¤ l'¨¦tape pr¨¦c¨¦dente", "Entrez le num¨¦ro de l'option et appuyez sur Entr¨¦e :"}},
-        {"Deutsch", {"Bitte w?hlen Sie eine Funktion:", "1) hakimi Additionsprogramm", "2) hakimi wiederholt, was Sie sagen", "3) Beenden (oder geben Sie q ein)", "4) Zum vorherigen Schritt zur¨¹ckkehren", "Geben Sie die Optionsnummer ein und dr¨¹cken Sie die Eingabetaste:"}},
-        {"Espa?ol", {"Por favor seleccione una funci¨®n:", "1) Programa de suma de hakimi", "2) hakimi repite lo que dices", "3) Salir (o escriba q)", "4) Volver al paso anterior", "Ingrese el n¨²mero de opci¨®n y presione Enter:"}},
-        {"???", {"??? ?????:", "1) hakimi ?? ????", "2) hakimi? ??? ?? ?????", "3) ?? (?? q ??)", "4) ????? ???", "?? ??? ???? Enter ?? ????:"}}
+        {"æ—¥æœ¬èª", {"æ©Ÿèƒ½ã‚’é¸æŠã—ã¦ãã ã•ã„ï¼š", "1) hakimi åŠ ç®—ãƒ—ãƒ­ã‚°ãƒ©ãƒ ", "2) hakimiãŒã‚ãªãŸã®è¨€è‘‰ã‚’ç¹°ã‚Šè¿”ã—ã¾ã™", "3) çµ‚äº† (ã¾ãŸã¯ q ã‚’å…¥åŠ›)", "4) å‰ã®ã‚¹ãƒ†ãƒƒãƒ—ã«æˆ»ã‚‹", "ã‚ªãƒ—ã‚·ãƒ§ãƒ³ç•ªå·ã‚’å…¥åŠ›ã—ã¦Enterã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ãã ã•ã„ï¼š"}},
+        {"FranÃ§ais", {"Veuillez sÃ©lectionner une fonction :", "1) Programme d'addition hakimi", "2) hakimi rÃ©pÃ¨te ce que vous dites", "3) Quitter (ou tapez q)", "4) Revenir Ã  l'Ã©tape prÃ©cÃ©dente", "Entrez le numÃ©ro de l'option et appuyez sur EntrÃ©e :"}},
+        {"Deutsch", {"Bitte wÃ¤hlen Sie eine Funktion:", "1) hakimi Additionsprogramm", "2) hakimi wiederholt, was Sie sagen", "3) Beenden (oder geben Sie q ein)", "4) Zum vorherigen Schritt zurÃ¼ckkehren", "Geben Sie die Optionsnummer ein und drÃ¼cken Sie die Eingabetaste:"}},
+        {"EspaÃ±ol", {"Por favor seleccione una funciÃ³n:", "1) Programa de suma de hakimi", "2) hakimi repite lo que dices", "3) Salir (o escriba q)", "4) Volver al paso anterior", "Ingrese el nÃºmero de opciÃ³n y presione Enter:"}},
+        {"Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©", {"ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± ÙˆØ¸ÙŠÙØ©:", "1) Ø¨Ø±Ù†Ø§Ù…Ø¬ Ø¬Ù…Ø¹ hakimi", "2) hakimi ÙŠÙƒØ±Ø± Ù…Ø§ ØªÙ‚ÙˆÙ„Ù‡", "3) Ø®Ø±ÙˆØ¬ (Ø£Ùˆ Ø§ÙƒØªØ¨ q)", "4) Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ø®Ø·ÙˆØ© Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©", "Ø£Ø¯Ø®Ù„ Ø±Ù‚Ù… Ø§Ù„Ø®ÙŠØ§Ø± ÙˆØ§Ø¶ØºØ· Enter:"}}
     };
 
     vector<string> previousChoices;
@@ -95,7 +96,7 @@ int main(void)
         cout << menuOptions[language][2] << endl;
         cout << menuOptions[language][3] << endl;
         cout << menuOptions[language][4] << endl;
-        cout << "by Â¬±¾Î°" << endl;
+        cout << "by å¢æœ¬ä¼Ÿ" << endl;
         cout << "qq 3178644407" << endl;
 
         string choice;
@@ -114,60 +115,60 @@ int main(void)
 
         if (choice == "1") {
             previousChoices.push_back("1");
-            int hakimi = readIntFromLine(language == "ÖĞÎÄ" ? "¸æËßÎÒÄãÓĞ¶àÉÙ¸öhakimi? " :
+            int hakimi = readIntFromLine(language == "ä¸­æ–‡" ? "å‘Šè¯‰æˆ‘ä½ æœ‰å¤šå°‘ä¸ªhakimi? " :
                 language == "English" ? "Tell me how many hakimi do you have? " :
-                language == "ÈÕ±¾ÕZ" ? "¤¢¤Ê¤¿¤ÏºÎ‚€¤Îhakimi¤ò³Ö¤Ã¤Æ¤¤¤Ş¤¹¤«£¿ " :
-                language == "Fran?ais" ? "Combien de hakimi avez-vous ? " :
+                language == "æ—¥æœ¬èª" ? "ã‚ãªãŸã¯ä½•å€‹ã®hakimiã‚’æŒã£ã¦ã„ã¾ã™ã‹ï¼Ÿ " :
+                language == "FranÃ§ais" ? "Combien de hakimi avez-vous ? " :
                 language == "Deutsch" ? "Wie viele hakimi haben Sie? " :
-                language == "Espa?ol" ? "?Cu¨¢ntos hakimi tienes? " :
-                "hakimi? ? ? ????? ");
-            cout << (language == "ÖĞÎÄ" ? "ÏÖÔÚÄãÌ«ÓĞhakimiÁË ÎÒ¸øÄã114514¸ö" :
+                language == "EspaÃ±ol" ? "Â¿CuÃ¡ntos hakimi tienes? " :
+                "ÙƒÙ… Ø¹Ø¯Ø¯ hakimi Ù„Ø¯ÙŠÙƒØŸ ");
+            cout << (language == "ä¸­æ–‡" ? "ç°åœ¨ä½ å¤ªæœ‰hakimiäº† æˆ‘ç»™ä½ 114514ä¸ª" :
                 language == "English" ? "Now you have too many hakimi, I give you 114514 more" :
-                language == "ÈÕ±¾ÕZ" ? "½ñ¡¢¤¢¤Ê¤¿¤Ï¤¿¤¯¤µ¤ó¤Îhakimi¤ò³Ö¤Ã¤Æ¤¤¤Ş¤¹¡£114514‚€¤ò¤¢¤²¤Ş¤¹¡£" :
-                language == "Fran?ais" ? "Maintenant, vous avez trop de hakimi, je vous en donne 114514 de plus." :
+                language == "æ—¥æœ¬èª" ? "ä»Šã€ã‚ãªãŸã¯ãŸãã•ã‚“ã®hakimiã‚’æŒã£ã¦ã„ã¾ã™ã€‚114514å€‹ã‚’ã‚ã’ã¾ã™ã€‚" :
+                language == "FranÃ§ais" ? "Maintenant, vous avez trop de hakimi, je vous en donne 114514 de plus." :
                 language == "Deutsch" ? "Jetzt haben Sie zu viele hakimi, ich gebe Ihnen 114514 mehr." :
-                language == "Espa?ol" ? "Ahora tienes demasiados hakimi, te doy 114514 m¨¢s." :
-                "?? hakimi? ?? ????. 114514?? ? ??????.") << endl;
+                language == "EspaÃ±ol" ? "Ahora tienes demasiados hakimi, te doy 114514 mÃ¡s." :
+                "Ø§Ù„Ø¢Ù† Ù„Ø¯ÙŠÙƒ Ø§Ù„ÙƒØ«ÙŠØ± Ù…Ù† hakimiØŒ Ø³Ø£Ø¹Ø·ÙŠÙƒ 114514 Ø£Ø®Ø±Ù‰.") << endl;
             hakimi = 114514 + hakimi;
-            cout << (language == "ÖĞÎÄ" ? "ËùÒÔÄãÓĞ" :
+            cout << (language == "ä¸­æ–‡" ? "æ‰€ä»¥ä½ æœ‰" :
                 language == "English" ? "So now you have " :
-                language == "ÈÕ±¾ÕZ" ? "¤À¤«¤é½ñ¡¢¤¢¤Ê¤¿¤Ï " :
-                language == "Fran?ais" ? "Donc maintenant, vous avez " :
+                language == "æ—¥æœ¬èª" ? "ã ã‹ã‚‰ä»Šã€ã‚ãªãŸã¯ " :
+                language == "FranÃ§ais" ? "Donc maintenant, vous avez " :
                 language == "Deutsch" ? "Also haben Sie jetzt " :
-                language == "Espa?ol" ? "As¨ª que ahora tienes " :
-                "??? ?? ") << hakimi << (language == "ÖĞÎÄ" ? "¸öhakimiÁË" :
+                language == "EspaÃ±ol" ? "AsÃ­ que ahora tienes " :
+                "Ù„Ø°Ø§ Ø§Ù„Ø¢Ù† Ù„Ø¯ÙŠÙƒ ") << hakimi << (language == "ä¸­æ–‡" ? "ä¸ªhakimiäº†" :
                     language == "English" ? " hakimi" :
-                    language == "ÈÕ±¾ÕZ" ? " ‚€¤Îhakimi¤ò³Ö¤Ã¤Æ¤¤¤Ş¤¹¡£" :
-                    language == "Fran?ais" ? " hakimi." :
+                    language == "æ—¥æœ¬èª" ? " å€‹ã®hakimiã‚’æŒã£ã¦ã„ã¾ã™ã€‚" :
+                    language == "FranÃ§ais" ? " hakimi." :
                     language == "Deutsch" ? " hakimi." :
-                    language == "Espa?ol" ? " hakimi." :
-                    "?? hakimi? ????.") << endl;
-            cout << (language == "ÖĞÎÄ" ? "ÖÇÕÏhakimiĞ¡³ÌĞò byÂ¬±¾Î° È¥°ÉĞ¡×Ó" :
+                    language == "EspaÃ±ol" ? " hakimi." :
+                    " hakimi.") << endl;
+            cout << (language == "ä¸­æ–‡" ? "æ™ºéšœhakimiå°ç¨‹åº byå¢æœ¬ä¼Ÿ å»å§å°å­" :
                 language == "English" ? "Stupid hakimi program by Lu Benwei, go ahead kid" :
-                language == "ÈÕ±¾ÕZ" ? "ñRÂ¹¤Êhakimi¥×¥í¥°¥é¥à by ¥ë©`¥Ù¥ó¥¦¥§¥¤ ĞĞ¤±ÉÙÄê" :
-                language == "Fran?ais" ? "Programme stupide de hakimi par Lu Benwei, vas-y gamin" :
+                language == "æ—¥æœ¬èª" ? "é¦¬é¹¿ãªhakimiãƒ—ãƒ­ã‚°ãƒ©ãƒ  by ãƒ«ãƒ¼ãƒ™ãƒ³ã‚¦ã‚§ã‚¤ è¡Œã‘å°‘å¹´" :
+                language == "FranÃ§ais" ? "Programme stupide de hakimi par Lu Benwei, vas-y gamin" :
                 language == "Deutsch" ? "Dummes hakimi-Programm von Lu Benwei, los geht's, Junge" :
-                language == "Espa?ol" ? "Programa est¨²pido de hakimi por Lu Benwei, adelante chico" :
-                "??? hakimi ???? by ????, ?? ??") << endl;
-            cout << (language == "ÖĞÎÄ" ? "°´»Ø³µ·µ»ØÖ÷²Ëµ¥..." :
+                language == "EspaÃ±ol" ? "Programa estÃºpido de hakimi por Lu Benwei, adelante chico" :
+                "Ø¨Ø±Ù†Ø§Ù…Ø¬ hakimi Ø§Ù„ØºØ¨ÙŠ Ø¨ÙˆØ§Ø³Ø·Ø© Ù„Ùˆ Ø¨Ù† ÙˆÙŠØŒ Ø§Ù†Ø·Ù„Ù‚ ÙŠØ§ ØµØºÙŠØ±") << endl;
+            cout << (language == "ä¸­æ–‡" ? "æŒ‰å›è½¦è¿”å›ä¸»èœå•..." :
                 language == "English" ? "Press Enter to return to the main menu..." :
-                language == "ÈÕ±¾ÕZ" ? "Enter¥­©`¤òÑº¤·¤Æ¥á¥¤¥ó¥á¥Ë¥å©`¤Ë‘ø¤ê¤Ş¤¹..." :
-                language == "Fran?ais" ? "Appuyez sur Entr¨¦e pour revenir au menu principal..." :
-                language == "Deutsch" ? "Dr¨¹cken Sie die Eingabetaste, um zum Hauptmen¨¹ zur¨¹ckzukehren..." :
-                language == "Espa?ol" ? "Presiona Enter para regresar al men¨² principal..." :
-                "Enter ?? ?? ?? ??? ?????...") << endl;
+                language == "æ—¥æœ¬èª" ? "Enterã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚Šã¾ã™..." :
+                language == "FranÃ§ais" ? "Appuyez sur EntrÃ©e pour revenir au menu principal..." :
+                language == "Deutsch" ? "DrÃ¼cken Sie die Eingabetaste, um zum HauptmenÃ¼ zurÃ¼ckzukehren..." :
+                language == "EspaÃ±ol" ? "Presiona Enter para regresar al menÃº principal..." :
+                "Ø§Ø¶ØºØ· Enter Ù„Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©...") << endl;
             string tmp;
             getline(cin, tmp);
         }
         else if (choice == "2") {
             previousChoices.push_back("2");
-            cout << (language == "ÖĞÎÄ" ? "ÎÒÑ§ÄãËµ»°£¨ÊäÈëÄÚÈİ½«±»»ØÏÔ£©¡£ÊäÈë \":q\" »ò \"exit\" »òµ¥¶ÀµÄ \"q\" ·µ»ØÖ÷²Ëµ¥¡£" :
+            cout << (language == "ä¸­æ–‡" ? "æˆ‘å­¦ä½ è¯´è¯ï¼ˆè¾“å…¥å†…å®¹å°†è¢«å›æ˜¾ï¼‰ã€‚è¾“å…¥ \":q\" æˆ– \"exit\" æˆ–å•ç‹¬çš„ \"q\" è¿”å›ä¸»èœå•ã€‚" :
                 language == "English" ? "I will repeat what you say. Type \":q\", \"exit\" or \"q\" to return to the main menu." :
-                language == "ÈÕ±¾ÕZ" ? "Ë½¤Ï¤¢¤Ê¤¿¤ÎÑÔÈ~¤òÀR¤ê·µ¤·¤Ş¤¹¡£\":q\"¡¢\"exit\"¡¢¤Ş¤¿¤Ï\"q\"¤òÈëÁ¦¤·¤Æ¥á¥¤¥ó¥á¥Ë¥å©`¤Ë‘ø¤ê¤Ş¤¹¡£" :
-                language == "Fran?ais" ? "Je vais r¨¦p¨¦ter ce que vous dites. Tapez \":q\", \"exit\" ou \"q\" pour revenir au menu principal." :
-                language == "Deutsch" ? "Ich werde wiederholen, was Sie sagen. Geben Sie \":q\", \"exit\" oder \"q\" ein, um zum Hauptmen¨¹ zur¨¹ckzukehren." :
-                language == "Espa?ol" ? "Repetir¨¦ lo que digas. Escribe \":q\", \"exit\" o \"q\" para regresar al men¨² principal." :
-                "?? ??? ?? ?? ??? ????. \":q\", \"exit\" ?? \"q\"? ???? ?? ??? ?????.") << endl;
+                language == "æ—¥æœ¬èª" ? "ç§ã¯ã‚ãªãŸã®è¨€è‘‰ã‚’ç¹°ã‚Šè¿”ã—ã¾ã™ã€‚\":q\"ã€\"exit\"ã€ã¾ãŸã¯\"q\"ã‚’å…¥åŠ›ã—ã¦ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚Šã¾ã™ã€‚" :
+                language == "FranÃ§ais" ? "Je vais rÃ©pÃ©ter ce que vous dites. Tapez \":q\", \"exit\" ou \"q\" pour revenir au menu principal." :
+                language == "Deutsch" ? "Ich werde wiederholen, was Sie sagen. Geben Sie \":q\", \"exit\" oder \"q\" ein, um zum HauptmenÃ¼ zurÃ¼ckzukehren." :
+                language == "EspaÃ±ol" ? "RepetirÃ© lo que digas. Escribe \":q\", \"exit\" o \"q\" para regresar al menÃº principal." :
+                "Ø³Ø£ÙƒØ±Ø± Ù…Ø§ ØªÙ‚ÙˆÙ„Ù‡. Ø§ÙƒØªØ¨ \":q\" Ø£Ùˆ \"exit\" Ø£Ùˆ \"q\" Ù„Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©.") << endl;
             for (;;) {
                 cout << "> " << flush;
                 string line;
@@ -180,13 +181,13 @@ int main(void)
                 string t = line;
                 trim(t);
                 if (t == ":q" || t == "exit" || t == "q" || t == "Q") {
-                    cout << (language == "ÖĞÎÄ" ? "·µ»ØÖ÷²Ëµ¥..." :
+                    cout << (language == "ä¸­æ–‡" ? "è¿”å›ä¸»èœå•..." :
                         language == "English" ? "Returning to the main menu..." :
-                        language == "ÈÕ±¾ÕZ" ? "¥á¥¤¥ó¥á¥Ë¥å©`¤Ë‘ø¤ê¤Ş¤¹..." :
-                        language == "Fran?ais" ? "Retour au menu principal..." :
-                        language == "Deutsch" ? "Zur¨¹ck zum Hauptmen¨¹..." :
-                        language == "Espa?ol" ? "Regresando al men¨² principal..." :
-                        "?? ??? ?????...") << endl;
+                        language == "æ—¥æœ¬èª" ? "ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚Šã¾ã™..." :
+                        language == "FranÃ§ais" ? "Retour au menu principal..." :
+                        language == "Deutsch" ? "ZurÃ¼ck zum HauptmenÃ¼..." :
+                        language == "EspaÃ±ol" ? "Regresando al menÃº principal..." :
+                        "Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©...") << endl;
                     break;
                 }
 
@@ -194,46 +195,46 @@ int main(void)
             }
         }
         else if (choice == "3" || choice == "q" || choice == "Q") {
-            cout << (language == "ÖĞÎÄ" ? "ÍË³ö³ÌĞò..." :
+            cout << (language == "ä¸­æ–‡" ? "é€€å‡ºç¨‹åº..." :
                 language == "English" ? "Exiting the program..." :
-                language == "ÈÕ±¾ÕZ" ? "¥×¥í¥°¥é¥à¤ò½KÁË¤·¤Ş¤¹..." :
-                language == "Fran?ais" ? "Quitter le programme..." :
+                language == "æ—¥æœ¬èª" ? "ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã—ã¾ã™..." :
+                language == "FranÃ§ais" ? "Quitter le programme..." :
                 language == "Deutsch" ? "Programm wird beendet..." :
-                language == "Espa?ol" ? "Saliendo del programa..." :
-                "????? ?????...") << endl;
+                language == "EspaÃ±ol" ? "Saliendo del programa..." :
+                "Ø¬Ø§Ø±Ù Ø¥Ù†Ù‡Ø§Ø¡ Ø§Ù„Ø¨Ø±Ù†Ø§Ù…Ø¬...") << endl;
             break;
         }
         else if (choice == "4") {
             if (!previousChoices.empty()) {
                 string lastChoice = previousChoices.back();
                 previousChoices.pop_back();
-                cout << (language == "ÖĞÎÄ" ? "·µ»ØÉÏÒ»²½..." :
+                cout << (language == "ä¸­æ–‡" ? "è¿”å›ä¸Šä¸€æ­¥..." :
                     language == "English" ? "Going back to the previous step..." :
-                    language == "ÈÕ±¾ÕZ" ? "Ç°¤Î¥¹¥Æ¥Ã¥×¤Ë‘ø¤ê¤Ş¤¹..." :
-                    language == "Fran?ais" ? "Retour ¨¤ l'¨¦tape pr¨¦c¨¦dente..." :
-                    language == "Deutsch" ? "Zur¨¹ck zum vorherigen Schritt..." :
-                    language == "Espa?ol" ? "Volviendo al paso anterior..." :
-                    "????? ??? ?????...") << endl;
+                    language == "æ—¥æœ¬èª" ? "å‰ã®ã‚¹ãƒ†ãƒƒãƒ—ã«æˆ»ã‚Šã¾ã™..." :
+                    language == "FranÃ§ais" ? "Retour Ã  l'Ã©tape prÃ©cÃ©dente..." :
+                    language == "Deutsch" ? "ZurÃ¼ck zum vorherigen Schritt..." :
+                    language == "EspaÃ±ol" ? "Volviendo al paso anterior..." :
+                    "Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ø®Ø·ÙˆØ© Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©...") << endl;
                 choice = lastChoice; // Set choice to the last choice
                 continue; // Restart the loop with the previous choice
             } else {
-                cout << (language == "ÖĞÎÄ" ? "Ã»ÓĞÉÏÒ»²½¿ÉÒÔ·µ»Ø¡£" :
+                cout << (language == "ä¸­æ–‡" ? "æ²¡æœ‰ä¸Šä¸€æ­¥å¯ä»¥è¿”å›ã€‚" :
                     language == "English" ? "No previous step to go back to." :
-                    language == "ÈÕ±¾ÕZ" ? "‘ø¤ë¥¹¥Æ¥Ã¥×¤¬¤¢¤ê¤Ş¤»¤ó¡£" :
-                    language == "Fran?ais" ? "Aucune ¨¦tape pr¨¦c¨¦dente ¨¤ laquelle revenir." :
-                    language == "Deutsch" ? "Kein vorheriger Schritt, zu dem zur¨¹ckgekehrt werden kann." :
-                    language == "Espa?ol" ? "No hay un paso anterior al que volver." :
-                    "????? ??? ?????? ??????.") << endl;
+                    language == "æ—¥æœ¬èª" ? "æˆ»ã‚‹ã‚¹ãƒ†ãƒƒãƒ—ãŒã‚ã‚Šã¾ã›ã‚“ã€‚" :
+                    language == "FranÃ§ais" ? "Aucune Ã©tape prÃ©cÃ©dente Ã  laquelle revenir." :
+                    language == "Deutsch" ? "Kein vorheriger Schritt, zu dem zurÃ¼ckgekehrt werden kann." :
+                    language == "EspaÃ±ol" ? "No hay un paso anterior al que volver." :
+                    "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø®Ø·ÙˆØ© Ø³Ø§Ø¨Ù‚Ø© Ù„Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„ÙŠÙ‡Ø§.") << endl;
             }
         }
         else {
-            cout << (language == "ÖĞÎÄ" ? "ÎŞĞ§Ñ¡Ïî£¬ÇëÖØÊÔ¡£" :
+            cout << (language == "ä¸­æ–‡" ? "æ— æ•ˆé€‰é¡¹ï¼Œè¯·é‡è¯•ã€‚" :
                 language == "English" ? "Invalid option, please try again." :
-                language == "ÈÕ±¾ÕZ" ? "Ÿo„¿¤Ê¥ª¥×¥·¥ç¥ó¤Ç¤¹¡£¤â¤¦Ò»¶È¤ªÔ‡¤·¤¯¤À¤µ¤¤¡£" :
-                language == "Fran?ais" ? "Option invalide, veuillez r¨¦essayer." :
-                language == "Deutsch" ? "Ung¨¹ltige Option, bitte versuchen Sie es erneut." :
-                language == "Espa?ol" ? "Opci¨®n no v¨¢lida, int¨¦ntalo de nuevo." :
-                "??? ?????. ?? ??????.") << endl;
+                language == "æ—¥æœ¬èª" ? "ç„¡åŠ¹ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã§ã™ã€‚ã‚‚ã†ä¸€åº¦ãŠè©¦ã—ãã ã•ã„ã€‚" :
+                language == "FranÃ§ais" ? "Option invalide, veuillez rÃ©essayer." :
+                language == "Deutsch" ? "UngÃ¼ltige Option, bitte versuchen Sie es erneut." :
+                language == "EspaÃ±ol" ? "OpciÃ³n no vÃ¡lida, intÃ©ntalo de nuevo." :
+                "Ø®ÙŠØ§Ø± ØºÙŠØ± ØµØ§Ù„Ø­ØŒ Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰.") << endl;
         }
     }
 
